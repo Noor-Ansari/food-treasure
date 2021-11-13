@@ -1,6 +1,11 @@
 import 'package:flutter/cupertino.dart';
-import "home.dart";
+import 'package:flutter/material.dart';
+import 'screens/home.dart';
 
 void main() {
-  return runApp(const Home());
+  return runApp(
+    const MaterialApp(
+      home: Home(),
+    ),
+  );
 }

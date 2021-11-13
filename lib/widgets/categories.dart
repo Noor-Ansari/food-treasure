@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:http/http.dart' as http;
+import '../screens/dishes.dart';
+import 'card.dart';
 import 'dart:convert';
 
 class Categories extends StatefulWidget {
@@ -38,38 +40,18 @@ class _CategoriesState extends State<Categories> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: categories
             .map(
-              (category) => Container(
-                margin: const EdgeInsets.all(20.0),
-                padding: const EdgeInsets.all(5.0),
-                height: 200.0,
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.blueAccent),
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(10.0),
-                  ),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      flex: 2,
-                      child: Image.network(
-                        category.strCategoryThumb,
-                        fit: BoxFit.fitWidth,
-                        height: 150.0,
-                      ),
+              (category) => InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Dishes(category.strCategory),
                     ),
-                    const SizedBox(width: 10.0),
-                    Expanded(
-                      child: Text(
-                        category.strCategory,
-                        style: TextStyle(
-                          color: Colors.amberAccent[400],
-                          fontSize: 30,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    )
-                  ],
+                  );
+                },
+                child: CustomCard(
+                  cardText: category.strCategory,
+                  cardImage: category.strCategoryThumb,
                 ),
               ),
             )
