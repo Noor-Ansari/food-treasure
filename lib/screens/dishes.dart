@@ -1,43 +1,22 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
-import "package:http/http.dart";
-import '../widgets/card.dart';
+import 'package:fooder/widgets/card.dart';
+import "package:fooder/screens/dish_info.dart";
+import "package:fooder/models/dish.dart";
 
-class Dishes extends StatefulWidget {
-  const Dishes(this.categoryName, {Key? key}) : super(key: key);
+class Dishes extends StatelessWidget {
   final String categoryName;
+  final List<Dish> dishes;
 
-  @override
-  _DishesState createState() => _DishesState();
-}
-
-class _DishesState extends State<Dishes> {
-  List<Dish> dishes = [];
-
-  @override
-  void initState() {
-    super.initState();
-    getDishes();
-  }
-
-  Future getDishes() async {
-    Uri url = Uri.parse(
-        'https://www.themealdb.com/api/json/v1/1/filter.php?c=${widget.categoryName}');
-    Response response = await get(url);
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      setState(() {
-        dishes = DishesResponse.fromJSON(data["meals"]).dishes;
-      });
-    }
-  }
+  const Dishes(this.categoryName, {required this.dishes, Key? key})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Center(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(widget.categoryName),
+          title: Text(categoryName),
+          centerTitle: true,
         ),
         body: SingleChildScrollView(
           child: Column(
@@ -45,9 +24,21 @@ class _DishesState extends State<Dishes> {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: dishes
                 .map(
-                  (dish) => CustomCard(
-                    cardText: dish.dishName,
-                    cardImage: dish.dishImage,
+                  (dish) => GestureDetector(
+                    onTap: () async {
+                      await dish.getDishInfo();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => DishInfo(
+                              dish: dish,
+                            ),
+                          ));
+                    },
+                    child: CustomCard(
+                      cardText: dish.name,
+                      cardImage: dish.image,
+                    ),
                   ),
                 )
                 .toList(),
@@ -56,27 +47,4 @@ class _DishesState extends State<Dishes> {
       ),
     );
   }
-}
-
-class DishesResponse {
-  List<Dish> dishes = [];
-
-  DishesResponse.fromJSON(List<dynamic> json) {
-    dishes = json
-        .map(
-          (dish) => Dish(
-              dishId: dish["idMeal"],
-              dishImage: dish["strMealThumb"],
-              dishName: dish["strMeal"]),
-        )
-        .toList();
-  }
-}
-
-class Dish {
-  final String dishName;
-  final String dishImage;
-  final String dishId;
-
-  Dish({required this.dishName, required this.dishImage, required this.dishId});
 }
