@@ -12,8 +12,6 @@ class Loader extends StatefulWidget {
 }
 
 class _LoaderState extends State<Loader> {
-  final CategoriesResponse instance = CategoriesResponse();
-
   final spinkit = SpinKitFadingCircle(
     itemBuilder: (BuildContext context, int index) {
       return DecoratedBox(
@@ -26,12 +24,12 @@ class _LoaderState extends State<Loader> {
 
   @override
   Widget build(BuildContext context) {
-    instance.fetchData();
-    Timer(const Duration(seconds: 2), () {
+    Timer(const Duration(seconds: 2), () async {
+      final categories = await CategoryService.fetchData();
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) => Categories(categories: instance.categories),
+          builder: (context) => Categories(categories: categories),
         ),
       );
     });

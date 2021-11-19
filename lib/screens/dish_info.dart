@@ -1,9 +1,11 @@
 import "package:flutter/material.dart";
 import 'package:fooder/models/dish.dart';
+import 'package:fooder/widgets/ingredients_list.dart';
 
 class DishInfo extends StatelessWidget {
-  const DishInfo({Key? key, required this.dish}) : super(key: key);
   final Dish dish;
+
+  const DishInfo({Key? key, required this.dish}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +21,23 @@ class DishInfo extends StatelessWidget {
               style:
                   const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
+            const Text(
+              "Ingredients",
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            IngredientList(
+              ingredients: dish.ingredients,
+            ),
+            const Text(
+              "Instructions",
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(18.0),
               child: Text(
@@ -27,7 +46,7 @@ class DishInfo extends StatelessWidget {
                   fontSize: 18.0,
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),
