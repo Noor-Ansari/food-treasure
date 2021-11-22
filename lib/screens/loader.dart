@@ -12,31 +12,25 @@ class Loader extends StatefulWidget {
 }
 
 class _LoaderState extends State<Loader> {
-  final spinkit = SpinKitFadingCircle(
-    itemBuilder: (BuildContext context, int index) {
-      return DecoratedBox(
-        decoration: BoxDecoration(
-          color: index.isEven ? Colors.red : Colors.blue,
-        ),
-      );
-    },
-  );
-
   @override
   Widget build(BuildContext context) {
     Timer(const Duration(seconds: 2), () async {
       final categories = await CategoryService.fetchData();
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
           builder: (context) => Categories(categories: categories),
         ),
       );
     });
-    return Scaffold(
+    return const Scaffold(
       backgroundColor: Colors.white,
       body: Center(
-        child: spinkit,
+        child: SpinKitPouringHourGlassRefined(
+          color: Colors.blue,
+          size: 100.0,
+          duration: Duration(seconds: 1),
+        ),
       ),
     );
   }

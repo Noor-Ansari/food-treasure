@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import "package:flutter/material.dart";
 import 'package:fooder/models/dish.dart';
 import 'package:fooder/widgets/ingredients_list.dart';
@@ -15,7 +16,7 @@ class DishInfo extends StatelessWidget {
         child: Column(
           children: [
             Image.network(dish.image),
-            const SizedBox(height: 18.0),
+            const SizedBox(height: 24.0),
             Text(
               dish.name,
               style:
@@ -47,9 +48,25 @@ class DishInfo extends StatelessWidget {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 24.0),
+              child: RichText(
+                text: TextSpan(
+                  text: 'Youtube Reference',
+                  style: const TextStyle(color: Colors.blue),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      launch(
+                          'https://docs.flutter.io/flutter/services/UrlLauncher-class.html');
+                    },
+                ),
+              ),
+            )
           ],
         ),
       ),
     );
   }
+
+  void launch(String s) {}
 }
