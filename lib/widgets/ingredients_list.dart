@@ -22,6 +22,7 @@ class IngredientList extends StatelessWidget {
             '${ingredients[index]["value"]}',
             style: const TextStyle(color: Colors.green, fontSize: 15),
           ),
+          minLeadingWidth: 4.0,
         );
       },
     );

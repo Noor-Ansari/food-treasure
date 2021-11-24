@@ -10,36 +10,48 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.all(20.0),
-      padding: const EdgeInsets.all(5.0),
       height: 200.0,
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.blueAccent),
-        borderRadius: const BorderRadius.all(
-          Radius.circular(10.0),
+      width: MediaQuery.of(context).size.width * 0.45,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(
+          Radius.circular(18.0),
         ),
+        color: Color.fromRGBO(51, 45, 45, 1.0),
+        boxShadow: [
+          BoxShadow(
+            color: Color.fromRGBO(51, 45, 45, 0.25),
+            blurRadius: 8,
+            offset: Offset(4, 4),
+          ),
+        ],
       ),
-      child: Row(
+      child: Column(
         children: [
-          Expanded(
-            flex: 2,
+          Container(
+            height: 150.0,
+            width: MediaQuery.of(context).size.width * 0.45,
+            padding: const EdgeInsets.all(18.0),
+            decoration: const BoxDecoration(
+              color: Colors.amber,
+              borderRadius: BorderRadius.all(Radius.circular(18.0)),
+            ),
             child: Image.network(
               cardImage,
               fit: BoxFit.fitWidth,
               height: 150.0,
             ),
           ),
-          const SizedBox(width: 10.0),
-          Expanded(
+          Container(
+            padding: const EdgeInsets.symmetric(vertical: 12.0),
             child: Text(
               cardText,
-              style: TextStyle(
-                color: Colors.amberAccent[400],
-                fontSize: 30,
+              style: const TextStyle(
+                color: Colors.white,
+                fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-          )
+          ),
         ],
       ),
     );

@@ -4,9 +4,10 @@ import 'screens/loader.dart';
 
 void main() {
   return runApp(
-    const MaterialApp(
+    MaterialApp(
       title: "Food Treasure",
-      home: Loader(),
+      theme: ThemeData(primaryColor: const Color.fromRGBO(51, 45, 45, 1.0)),
+      home: const Loader(),
     ),
   );
 }

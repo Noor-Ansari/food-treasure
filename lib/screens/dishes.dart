@@ -17,31 +17,35 @@ class Dishes extends StatelessWidget {
         appBar: AppBar(
           title: Text(categoryName),
           centerTitle: true,
+          backgroundColor: Colors.amber,
         ),
         body: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: dishes
-                .map(
-                  (dish) => GestureDetector(
-                    onTap: () async {
-                      await dish.getDishInfo();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => DishInfo(
-                              dish: dish,
-                            ),
-                          ));
-                    },
-                    child: CustomCard(
-                      cardText: dish.name,
-                      cardImage: dish.image,
+          padding: const EdgeInsets.symmetric(vertical: 30.0),
+          child: Center(
+            child: Wrap(
+              spacing: 12.0,
+              runSpacing: 12.0,
+              children: dishes
+                  .map(
+                    (dish) => GestureDetector(
+                      onTap: () async {
+                        await dish.getDishInfo();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => DishInfo(
+                                dish: dish,
+                              ),
+                            ));
+                      },
+                      child: CustomCard(
+                        cardText: dish.name,
+                        cardImage: dish.image,
+                      ),
                     ),
-                  ),
-                )
-                .toList(),
+                  )
+                  .toList(),
+            ),
           ),
         ),
       ),

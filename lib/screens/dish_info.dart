@@ -11,7 +11,11 @@ class DishInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(dish.name), centerTitle: true),
+      appBar: AppBar(
+        title: Text(dish.name),
+        centerTitle: true,
+        backgroundColor: Colors.amber,
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [

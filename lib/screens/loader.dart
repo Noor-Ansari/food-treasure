@@ -27,7 +27,7 @@ class _LoaderState extends State<Loader> {
       backgroundColor: Colors.white,
       body: Center(
         child: SpinKitPouringHourGlassRefined(
-          color: Colors.blue,
+          color: Colors.amber,
           size: 100.0,
           duration: Duration(seconds: 1),
         ),
