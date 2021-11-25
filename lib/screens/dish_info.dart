@@ -12,20 +12,24 @@ class DishInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(dish.name),
+        iconTheme: const IconThemeData(
+          color: Colors.white, //change your color here
+        ),
+        title: Text(
+          dish.name,
+          style: const TextStyle(color: Colors.white),
+        ),
         centerTitle: true,
-        backgroundColor: Colors.amber,
+        backgroundColor: const Color.fromRGBO(223, 123, 11, 1),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Image.network(dish.image),
-            const SizedBox(height: 24.0),
-            Text(
-              dish.name,
-              style:
-                  const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+            Hero(
+              tag: "dish-image-${dish.name}",
+              child: Image.network(dish.image),
             ),
+            const SizedBox(height: 24.0),
             const Text(
               "Ingredients",
               style: TextStyle(
@@ -33,9 +37,11 @@ class DishInfo extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            const SizedBox(height: 24.0),
             IngredientList(
               ingredients: dish.ingredients,
             ),
+            const SizedBox(height: 24.0),
             const Text(
               "Instructions",
               style: TextStyle(

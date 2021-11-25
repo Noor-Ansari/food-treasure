@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:fooder/widgets/card.dart';
 import "package:fooder/screens/dish_info.dart";
 import "package:fooder/models/dish.dart";
@@ -15,21 +16,29 @@ class Dishes extends StatelessWidget {
     return Center(
       child: Scaffold(
         appBar: AppBar(
-          title: Text(categoryName),
+          iconTheme: const IconThemeData(
+            color: Colors.white,
+          ),
+          title: Text(
+            categoryName,
+            style: const TextStyle(color: Colors.white),
+          ),
           centerTitle: true,
-          backgroundColor: Colors.amber,
+          backgroundColor: const Color.fromRGBO(223, 123, 11, 1),
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: 30.0),
           child: Center(
             child: Wrap(
-              spacing: 12.0,
-              runSpacing: 12.0,
+              spacing: 16.0,
+              runSpacing: 20.0,
               children: dishes
                   .map(
                     (dish) => GestureDetector(
                       onTap: () async {
-                        await dish.getDishInfo();
+                        if (dish.recipee == "") {
+                          await dish.getDishInfo();
+                        }
                         Navigator.push(
                             context,
                             MaterialPageRoute(

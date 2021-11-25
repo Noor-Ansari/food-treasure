@@ -15,7 +15,7 @@ class Categories extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Fooder'),
         centerTitle: true,
-        backgroundColor: Colors.amber,
+        backgroundColor: const Color.fromRGBO(223, 123, 11, 1),
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.symmetric(vertical: 30.0),
@@ -27,7 +27,9 @@ class Categories extends StatelessWidget {
                 .map(
                   (category) => InkWell(
                     onTap: () async {
-                      await category.getDishes();
+                      if (category.dishes.isEmpty) {
+                        await category.getDishes();
+                      }
                       Navigator.push(
                         context,
                         MaterialPageRoute(
