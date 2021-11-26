@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:fooder/widgets/card.dart';
 import "package:fooder/screens/dish_info.dart";
+
+import 'package:fooder/constants/color.dart';
 import "package:fooder/models/dish.dart";
 
 class Dishes extends StatelessWidget {
@@ -24,7 +26,7 @@ class Dishes extends StatelessWidget {
             style: const TextStyle(color: Colors.white),
           ),
           centerTitle: true,
-          backgroundColor: const Color.fromRGBO(223, 123, 11, 1),
+          backgroundColor: primaryColor,
         ),
         body: SingleChildScrollView(
           padding: const EdgeInsets.symmetric(vertical: 30.0),

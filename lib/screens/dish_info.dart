@@ -1,7 +1,11 @@
-import 'package:flutter/gestures.dart';
 import "package:flutter/material.dart";
+
 import 'package:fooder/models/dish.dart';
+import 'package:fooder/widgets/hyper_link.dart';
 import 'package:fooder/widgets/ingredients_list.dart';
+
+import 'package:fooder/constants/color.dart';
+import 'package:fooder/helpers/text.dart';
 
 class DishInfo extends StatelessWidget {
   final Dish dish;
@@ -13,14 +17,14 @@ class DishInfo extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
-          color: Colors.white, //change your color here
+          color: Colors.white,
         ),
         title: Text(
           dish.name,
           style: const TextStyle(color: Colors.white),
         ),
         centerTitle: true,
-        backgroundColor: const Color.fromRGBO(223, 123, 11, 1),
+        backgroundColor: primaryColor,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -49,27 +53,15 @@ class DishInfo extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(18.0),
-              child: Text(
-                dish.recipee,
-                style: const TextStyle(
-                  fontSize: 18.0,
-                ),
-              ),
+            const SizedBox(
+              height: 24,
             ),
+            ...splitText(dish.recipee, context),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 24.0),
-              child: RichText(
-                text: TextSpan(
-                  text: 'Youtube Reference',
-                  style: const TextStyle(color: Colors.blue),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      launch(
-                          'https://docs.flutter.io/flutter/services/UrlLauncher-class.html');
-                    },
-                ),
+              child: HyperLink(
+                text: "Youtube Reference",
+                url: dish.videoRef,
               ),
             )
           ],
@@ -77,6 +69,4 @@ class DishInfo extends StatelessWidget {
       ),
     );
   }
-
-  void launch(String s) {}
 }

@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import "../constants/color.dart";
+
 class CustomCard extends StatelessWidget {
   const CustomCard({required this.cardText, required this.cardImage, Key? key})
       : super(key: key);
@@ -11,14 +13,12 @@ class CustomCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       clipBehavior: Clip.antiAlias,
-      height: 200.0,
-      // padding: const EdgeInsets.all(10.0),
+      height: 220.0,
       width: MediaQuery.of(context).size.width * 0.45,
       decoration: const BoxDecoration(
         borderRadius: BorderRadius.all(
           Radius.circular(18.0),
         ),
-        // color: Color.fromRGBO(51, 45, 45, 1.0),
         color: Colors.white,
         boxShadow: [
           BoxShadow(
@@ -31,11 +31,10 @@ class CustomCard extends StatelessWidget {
       child: Column(
         children: [
           Container(
-            height: 150.0,
+            height: 170.0,
             width: MediaQuery.of(context).size.width * 0.45,
-            // padding: const EdgeInsets.all(18.0),
             decoration: const BoxDecoration(
-              color: Colors.amber,
+              color: secondaryColor,
               borderRadius: BorderRadius.all(Radius.circular(18.0)),
             ),
             child: Hero(
@@ -53,7 +52,7 @@ class CustomCard extends StatelessWidget {
               cardText,
               textAlign: TextAlign.center,
               style: const TextStyle(
-                color: Color.fromRGBO(223, 123, 11, 1),
+                color: primaryColor,
                 fontSize: 18,
                 overflow: TextOverflow.ellipsis,
                 fontWeight: FontWeight.bold,

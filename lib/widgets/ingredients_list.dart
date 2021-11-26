@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import 'package:fooder/constants/color.dart';
+
 class IngredientList extends StatelessWidget {
   final List<Map<String, dynamic>> ingredients;
 
@@ -18,19 +20,21 @@ class IngredientList extends StatelessWidget {
                 child: Icon(
                   Icons.circle,
                   size: 12.0,
-                  color: Color.fromRGBO(223, 123, 11, 1),
+                  color: primaryColor,
                 ),
               ),
               title: Text(
                 '${ingredient["name"]}'.toUpperCase(),
-                style: const TextStyle(fontWeight: FontWeight.bold),
+                style:
+                    const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
               trailing: Text(
                 '${ingredient["value"]}',
                 style: const TextStyle(
-                    color: Colors.green,
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold),
+                  color: primaryColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               minLeadingWidth: 4.0,
             );

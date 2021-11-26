@@ -41,7 +41,7 @@ class CategoryService {
       Response response = await get(url);
       if (response.statusCode == 200) {
         final Map data = json.decode(response.body);
-        return data["categories"]
+        List<Category> categories = data["categories"]
             .map<Category>(
               (item) => Category(
                   id: item["idCategory"],
@@ -49,7 +49,10 @@ class CategoryService {
                   description: item["strCategoryDescription"],
                   image: item["strCategoryThumb"]),
             )
+            .toList()
+            .where((i) => i.name != "Pork" && i.name != "Goat")
             .toList();
+        return categories;
       } else {
         return <Category>[];
       }
