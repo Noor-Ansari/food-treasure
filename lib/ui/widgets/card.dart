@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import "../constants/color.dart";
+import 'package:fooder/constants/color.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({required this.cardText, required this.cardImage, Key? key})

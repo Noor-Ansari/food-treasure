@@ -1,40 +1,13 @@
 import 'dart:convert';
 import "package:http/http.dart";
-import "./dish.dart";
 
-class Category {
-  final String id;
-  final String name;
-  final String image;
-  final String description;
-  List<Dish> dishes = [];
+import 'package:fooder/business_logic/models/category.dart';
 
-  Category(
-      {required this.id,
-      required this.name,
-      required this.description,
-      required this.image});
+import 'package:fooder/services/web_services/category_service/category_service.dart';
 
-  Future<void> getDishes() async {
-    Uri url =
-        Uri.parse('https://www.themealdb.com/api/json/v1/1/filter.php?c=$name');
-    Response response = await get(url);
-    if (response.statusCode == 200) {
-      final Map data = jsonDecode(response.body);
-      dishes = data["meals"]
-          .map<Dish>(
-            (dish) => Dish(
-                id: dish["idMeal"],
-                image: dish["strMealThumb"],
-                name: dish["strMeal"]),
-          )
-          .toList();
-    }
-  }
-}
-
-class CategoryService {
-  static Future<List<Category>> fetchData() async {
+class CategoryServiceImp implements CategoryService {
+  @override
+  Future<List<Category>> fetchCategories() async {
     try {
       Uri url =
           Uri.parse("https://www.themealdb.com/api/json/v1/1/categories.php");
