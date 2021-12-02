@@ -30,78 +30,70 @@ class _DishInfoState extends State<DishInfo> {
 
   @override
   void initState() {
-    model.loadData(widget.id);
+    Provider.of<DishInfoViewModel>(context, listen: false).loadData(widget.id);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<DishInfoViewModel>(
-      create: (context) => model,
-      child: _ui(),
-    );
-  }
-
-  Widget _ui() {
-    return Consumer<DishInfoViewModel>(
-      builder: (context, model, _) => Scaffold(
-        appBar: AppBar(
-          iconTheme: const IconThemeData(
-            color: Colors.white,
-          ),
-          title: Text(
-            widget.name,
-            style: const TextStyle(color: Colors.white),
-          ),
-          centerTitle: true,
-          backgroundColor: primaryColor,
+    DishInfoViewModel model = Provider.of<DishInfoViewModel>(context);
+    return Scaffold(
+      appBar: AppBar(
+        iconTheme: const IconThemeData(
+          color: Colors.white,
         ),
-        body: SingleChildScrollView(
-          child: Column(
-            children: [
-              Hero(
-                tag: "dish-image-${widget.name}",
-                child: CachedNetworkImage(
-                  imageUrl: widget.image,
+        title: Text(
+          widget.name,
+          style: const TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
+        backgroundColor: primaryColor,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Hero(
+              tag: "dish-image-${widget.name}",
+              child: CachedNetworkImage(
+                imageUrl: widget.image,
+              ),
+            ),
+            const SizedBox(height: 24.0),
+            if (model.loading || model.noData) ...[
+              const Loading(atCenter: false)
+            ] else ...[
+              const Text(
+                "Ingredients",
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 24.0),
-              if (model.loading || model.noData) ...[
-                const Loading(atCenter: false)
-              ] else ...[
-                const Text(
-                  "Ingredients",
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+              IngredientList(
+                ingredients: model.dishInfo.ingredients,
+              ),
+              const SizedBox(height: 24.0),
+              const Text(
+                "Instructions",
+                style: TextStyle(
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
                 ),
-                const SizedBox(height: 24.0),
-                IngredientList(
-                  ingredients: model.dishInfo.ingredients,
+              ),
+              const SizedBox(
+                height: 24,
+              ),
+              ...splitText(model.dishInfo.recipee, context),
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: 24.0),
+                child: HyperLink(
+                  text: "Youtube Reference",
+                  url: model.dishInfo.videoRef,
                 ),
-                const SizedBox(height: 24.0),
-                const Text(
-                  "Instructions",
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(
-                  height: 24,
-                ),
-                ...splitText(model.dishInfo.recipee, context),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 24.0),
-                  child: HyperLink(
-                    text: "Youtube Reference",
-                    url: model.dishInfo.videoRef,
-                  ),
-                )
-              ]
-            ],
-          ),
+              )
+            ]
+          ],
         ),
       ),
     );

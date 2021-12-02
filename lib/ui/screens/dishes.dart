@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:fooder/services/service_locator.dart';
 import 'package:provider/provider.dart';
 
 import 'package:fooder/ui/screens/dish_info.dart';
@@ -21,11 +20,10 @@ class Dishes extends StatefulWidget {
 }
 
 class _DishesState extends State<Dishes> {
-  DishesViewModel model = serviceLocator<DishesViewModel>();
-
   @override
   void initState() {
-    model.loadData(widget.categoryName);
+    Provider.of<DishesViewModel>(context, listen: false)
+        .loadData(widget.categoryName);
     super.initState();
   }
 
@@ -40,54 +38,50 @@ class _DishesState extends State<Dishes> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<DishesViewModel>(
-      create: (context) => model,
-      child: Center(
-        child: Scaffold(
-          appBar: AppBar(
-            iconTheme: const IconThemeData(
-              color: Colors.white,
-            ),
-            title: Text(
-              widget.categoryName,
-              style: const TextStyle(color: Colors.white),
-            ),
-            centerTitle: true,
-            backgroundColor: primaryColor,
+    DishesViewModel model = Provider.of<DishesViewModel>(context);
+    return Center(
+      child: Scaffold(
+        appBar: AppBar(
+          iconTheme: const IconThemeData(
+            color: Colors.white,
           ),
-          body: _ui(),
+          title: Text(
+            widget.categoryName,
+            style: const TextStyle(color: Colors.white),
+          ),
+          centerTitle: true,
+          backgroundColor: primaryColor,
         ),
+        body: _ui(model),
       ),
     );
   }
 
-  Widget _ui() {
-    return Consumer<DishesViewModel>(
-      builder: (context, model, _) => model.loading
-          ? const Loading(
-              atCenter: true,
-            )
-          : SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(vertical: 30.0),
-              child: Center(
-                child: Wrap(
-                  spacing: 16.0,
-                  runSpacing: 20.0,
-                  children: model.dishes
-                      .map(
-                        (dish) => GestureDetector(
-                          onTap: () =>
-                              showDishInfo(dish.id, dish.name, dish.image),
-                          child: CustomCard(
-                            cardText: dish.name,
-                            cardImage: dish.image,
-                          ),
+  Widget _ui(DishesViewModel model) {
+    return model.loading
+        ? const Loading(
+            atCenter: true,
+          )
+        : SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(vertical: 30.0),
+            child: Center(
+              child: Wrap(
+                spacing: 16.0,
+                runSpacing: 20.0,
+                children: model.dishes
+                    .map(
+                      (dish) => GestureDetector(
+                        onTap: () =>
+                            showDishInfo(dish.id, dish.name, dish.image),
+                        child: CustomCard(
+                          cardText: dish.name,
+                          cardImage: dish.image,
                         ),
-                      )
-                      .toList(),
-                ),
+                      ),
+                    )
+                    .toList(),
               ),
             ),
-    );
+          );
   }
 }

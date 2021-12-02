@@ -13,10 +13,12 @@ class DishesViewModel extends ChangeNotifier {
   final DishService _instance = serviceLocator<DishService>();
 
   Future<void> loadData(String categoryName) async {
-    loading = true;
-    this.categoryName = categoryName;
-    dishes = await _instance.fetchDishes(categoryName);
-    loading = false;
-    notifyListeners();
+    if (this.categoryName != categoryName) {
+      loading = true;
+      this.categoryName = categoryName;
+      dishes = await _instance.fetchDishes(categoryName);
+      loading = false;
+      notifyListeners();
+    }
   }
 }

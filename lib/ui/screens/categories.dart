@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 
 import 'package:provider/provider.dart';
-import 'package:fooder/services/service_locator.dart';
 
 import 'package:fooder/ui/screens/dishes.dart';
 import 'package:fooder/ui/widgets/card.dart';
@@ -19,11 +18,9 @@ class Categories extends StatefulWidget {
 }
 
 class _CategoriesState extends State<Categories> {
-  CategoriesViewModel model = serviceLocator<CategoriesViewModel>();
-
   @override
   void initState() {
-    model.loadData();
+    Provider.of<CategoriesViewModel>(context, listen: false).loadData();
     super.initState();
   }
 
@@ -38,47 +35,43 @@ class _CategoriesState extends State<Categories> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<CategoriesViewModel>(
-      create: (context) => model,
-      child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Fooder'),
-          centerTitle: true,
-          backgroundColor: primaryColor,
-        ),
-        body: _ui(),
+    CategoriesViewModel model = Provider.of<CategoriesViewModel>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Fooder'),
+        centerTitle: true,
+        backgroundColor: primaryColor,
       ),
+      body: _ui(model),
     );
   }
 
-  Widget _ui() {
-    return Consumer<CategoriesViewModel>(
-      builder: (context, model, _) => model.loading
-          ? const Loading(
-              atCenter: true,
-            )
-          : SingleChildScrollView(
-              padding: const EdgeInsets.symmetric(
-                vertical: 30,
-              ),
-              child: Center(
-                child: Wrap(
-                  spacing: 12.0,
-                  runSpacing: 12.0,
-                  children: model.categories
-                      .map(
-                        (category) => InkWell(
-                          onTap: () => showDishes(category.name),
-                          child: CustomCard(
-                            cardText: category.name,
-                            cardImage: category.image,
-                          ),
+  Widget _ui(CategoriesViewModel model) {
+    return model.loading
+        ? const Loading(
+            atCenter: true,
+          )
+        : SingleChildScrollView(
+            padding: const EdgeInsets.symmetric(
+              vertical: 30,
+            ),
+            child: Center(
+              child: Wrap(
+                spacing: 12.0,
+                runSpacing: 12.0,
+                children: model.categories
+                    .map(
+                      (category) => InkWell(
+                        onTap: () => showDishes(category.name),
+                        child: CustomCard(
+                          cardText: category.name,
+                          cardImage: category.image,
                         ),
-                      )
-                      .toList(),
-                ),
+                      ),
+                    )
+                    .toList(),
               ),
             ),
-    );
+          );
   }
 }
