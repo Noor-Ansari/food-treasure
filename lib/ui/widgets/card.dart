@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 
+import "package:cached_network_image/cached_network_image.dart";
+
 import 'package:fooder/constants/color.dart';
 
 class CustomCard extends StatelessWidget {
@@ -39,11 +41,7 @@ class CustomCard extends StatelessWidget {
             ),
             child: Hero(
               tag: "dish-image-$cardText",
-              child: Image.network(
-                cardImage,
-                fit: BoxFit.fitWidth,
-                height: 150.0,
-              ),
+              child: image(cardImage),
             ),
           ),
           Container(
@@ -61,6 +59,21 @@ class CustomCard extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  CachedNetworkImage image(String cardImage) {
+    return CachedNetworkImage(
+      imageUrl: cardImage,
+      placeholder: (context, url) => const Padding(
+        padding: EdgeInsets.all(40.0),
+        child: CircularProgressIndicator(
+          color: primaryColor,
+        ),
+      ),
+      errorWidget: (context, url, error) => const Icon(Icons.error),
+      fit: BoxFit.fitWidth,
+      height: 150.0,
     );
   }
 }

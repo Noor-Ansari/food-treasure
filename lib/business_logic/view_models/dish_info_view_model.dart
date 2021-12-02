@@ -6,9 +6,9 @@ import 'package:fooder/services/service_locator.dart';
 import 'package:fooder/services/web_services/dish_service/dish_service.dart';
 
 class DishInfoViewModel extends ChangeNotifier {
-  DishInfo dishInfo =
-      DishInfo(name: "", image: "", recipee: "", videoRef: "", ingredients: []);
+  DishInfo dishInfo = DishInfo.empty();
   bool loading = false;
+  bool noData = false;
 
   final DishService _instance = serviceLocator<DishService>();
 
@@ -16,6 +16,9 @@ class DishInfoViewModel extends ChangeNotifier {
     loading = true;
     dishInfo = await _instance.fetchDishInfo(dishId);
     loading = false;
+    if (dishInfo.ingredients.isEmpty) {
+      noData = true;
+    }
     notifyListeners();
   }
 }

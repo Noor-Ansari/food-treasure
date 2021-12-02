@@ -29,13 +29,11 @@ class _DishesState extends State<Dishes> {
     super.initState();
   }
 
-  void showDishInfo(String dishId) {
+  void showDishInfo(String id, String name, String image) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => DishInfo(
-          dishId: dishId,
-        ),
+        builder: (context) => DishInfo(id: id, name: name, image: image),
       ),
     );
   }
@@ -66,7 +64,9 @@ class _DishesState extends State<Dishes> {
   Widget _ui() {
     return Consumer<DishesViewModel>(
       builder: (context, model, _) => model.loading
-          ? const Loading()
+          ? const Loading(
+              atCenter: true,
+            )
           : SingleChildScrollView(
               padding: const EdgeInsets.symmetric(vertical: 30.0),
               child: Center(
@@ -76,7 +76,8 @@ class _DishesState extends State<Dishes> {
                   children: model.dishes
                       .map(
                         (dish) => GestureDetector(
-                          onTap: () => showDishInfo(dish.id),
+                          onTap: () =>
+                              showDishInfo(dish.id, dish.name, dish.image),
                           child: CustomCard(
                             cardText: dish.name,
                             cardImage: dish.image,

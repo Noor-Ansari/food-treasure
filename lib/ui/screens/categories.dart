@@ -54,7 +54,9 @@ class _CategoriesState extends State<Categories> {
   Widget _ui() {
     return Consumer<CategoriesViewModel>(
       builder: (context, model, _) => model.loading
-          ? const Loading()
+          ? const Loading(
+              atCenter: true,
+            )
           : SingleChildScrollView(
               padding: const EdgeInsets.symmetric(
                 vertical: 30,

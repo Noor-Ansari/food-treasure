@@ -40,8 +40,6 @@ class DishServiceImp implements DishService {
       Response response = await get(url);
       if (response.statusCode == 200) {
         final Map data = jsonDecode(response.body);
-        String name = data["meals"][0]["strMeal"];
-        String image = data["meals"][0]["strMealThumb"];
         String recipee = data["meals"][0]["strInstructions"];
         String videoRef = data["meals"][0]["strYoutube"];
 
@@ -61,18 +59,12 @@ class DishServiceImp implements DishService {
           }
         });
         return DishInfo(
-            name: name,
-            image: image,
-            recipee: recipee,
-            videoRef: videoRef,
-            ingredients: ingredients);
+            recipee: recipee, videoRef: videoRef, ingredients: ingredients);
       } else {
-        return DishInfo(
-            name: "", image: "", recipee: "", videoRef: "", ingredients: []);
+        return DishInfo.empty();
       }
     } catch (e) {
-      return DishInfo(
-          name: "", image: "", recipee: "", videoRef: "", ingredients: []);
+      return DishInfo.empty();
     }
   }
 }
