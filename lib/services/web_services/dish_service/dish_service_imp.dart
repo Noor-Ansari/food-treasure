@@ -33,38 +33,49 @@ class DishServiceImp implements DishService {
   }
 
   @override
-  Future<DishInfo> fetchDishInfo(String dishId) async {
+  Future<List<DishInfo>> fetchDishInfo(String dishName) async {
     try {
       Uri url = Uri.parse(
-          'https://www.themealdb.com/api/json/v1/1/lookup.php?i=$dishId');
+          'https://www.themealdb.com/api/json/v1/1/search.php?s=$dishName');
       Response response = await get(url);
       if (response.statusCode == 200) {
         final Map data = jsonDecode(response.body);
-        String recipee = data["meals"][0]["strInstructions"];
-        String videoRef = data["meals"][0]["strYoutube"];
+        List<DishInfo> dishes = [];
 
-        List<Map<String, String>> ingredients = [];
-        int index = 0;
-        data["meals"][0].forEach((key, value) {
-          if (key.toString().startsWith("strIngredient") &&
-              value != null &&
-              value != "") {
-            ingredients.add({"name": value});
-          } else if (key.toString().startsWith("strMeasure") &&
-              value != null &&
-              value != "" &&
-              ingredients.length > index) {
-            ingredients[index]["value"] = value;
-            index++;
-          }
-        });
-        return DishInfo(
-            recipee: recipee, videoRef: videoRef, ingredients: ingredients);
+        for (var item in data["meals"]) {
+          String recipee = item["strInstructions"];
+          String videoRef = item["strYoutube"];
+          String name = item["strMeal"];
+          String image = item["strMealThumb"];
+
+          List<Map<String, String>> ingredients = [];
+          int index = 0;
+          item.forEach((key, value) {
+            if (key.toString().startsWith("strIngredient") &&
+                value != null &&
+                value != "") {
+              ingredients.add({"name": value});
+            } else if (key.toString().startsWith("strMeasure") &&
+                value != null &&
+                value != "" &&
+                ingredients.length > index) {
+              ingredients[index]["value"] = value;
+              index++;
+            }
+          });
+          dishes.add(DishInfo(
+              name: name,
+              image: image,
+              recipee: recipee,
+              videoRef: videoRef,
+              ingredients: ingredients));
+        }
+        return dishes;
       } else {
-        return DishInfo.empty();
+        return [DishInfo.empty()];
       }
     } catch (e) {
-      return DishInfo.empty();
+      return [DishInfo.empty()];
     }
   }
 }

@@ -1,8 +1,7 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import "package:flutter/material.dart";
 
 import 'package:provider/provider.dart';
-import 'package:fooder/services/service_locator.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:fooder/ui/widgets/ingredients_list.dart';
 import 'package:fooder/ui/widgets/loading.dart';
@@ -10,15 +9,15 @@ import 'package:fooder/ui/widgets/hyper_link.dart';
 
 import 'package:fooder/business_logic/view_models/dish_info_view_model.dart';
 
+import 'package:fooder/services/service_locator.dart';
+
 import 'package:fooder/ui/utils/text.dart';
 import 'package:fooder/constants/color.dart';
 
 class DishInfo extends StatefulWidget {
-  final String id;
   final String name;
   final String image;
-  const DishInfo(
-      {Key? key, required this.id, required this.name, required this.image})
+  const DishInfo({Key? key, required this.name, required this.image})
       : super(key: key);
 
   @override
@@ -30,7 +29,8 @@ class _DishInfoState extends State<DishInfo> {
 
   @override
   void initState() {
-    Provider.of<DishInfoViewModel>(context, listen: false).loadData(widget.id);
+    Provider.of<DishInfoViewModel>(context, listen: false)
+        .loadData(widget.name);
     super.initState();
   }
 
