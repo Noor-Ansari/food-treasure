@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooder/ui/widgets/bottom_navigation.dart';
 
 import 'package:provider/provider.dart';
 
@@ -27,11 +28,11 @@ class _DishesState extends State<Dishes> {
     super.initState();
   }
 
-  void showDishInfo(String id, String name, String image) {
+  void showDishInfo(String name, String image) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => DishInfo(id: id, name: name, image: image),
+        builder: (context) => DishInfo(name: name, image: image),
       ),
     );
   }
@@ -53,6 +54,7 @@ class _DishesState extends State<Dishes> {
           backgroundColor: primaryColor,
         ),
         body: _ui(model),
+        bottomNavigationBar: const CustomBottomNavigation(),
       ),
     );
   }
@@ -71,8 +73,7 @@ class _DishesState extends State<Dishes> {
                 children: model.dishes
                     .map(
                       (dish) => GestureDetector(
-                        onTap: () =>
-                            showDishInfo(dish.id, dish.name, dish.image),
+                        onTap: () => showDishInfo(dish.name, dish.image),
                         child: CustomCard(
                           cardText: dish.name,
                           cardImage: dish.image,

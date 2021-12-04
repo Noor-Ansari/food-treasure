@@ -4,9 +4,11 @@ import 'package:provider/provider.dart';
 
 import 'package:fooder/ui/screens/loader.dart';
 
+import 'package:fooder/business_logic/view_models/custom_search_view_model.dart';
 import 'package:fooder/business_logic/view_models/categories_view_model.dart';
 import 'package:fooder/business_logic/view_models/dish_info_view_model.dart';
 import 'package:fooder/business_logic/view_models/dishes_view_model.dart';
+import 'package:fooder/business_logic/view_models/bottom_navbar_view_model.dart';
 
 import 'package:fooder/services/service_locator.dart';
 
@@ -16,6 +18,10 @@ void main() {
       serviceLocator<CategoriesViewModel>();
   DishesViewModel dishesViewModel = serviceLocator<DishesViewModel>();
   DishInfoViewModel dishInfoViewModel = serviceLocator<DishInfoViewModel>();
+  BottomNabarViewModel bottomNavbarViewModel =
+      serviceLocator<BottomNabarViewModel>();
+  CustomSearchViewModel customSearchViewModel =
+      serviceLocator<CustomSearchViewModel>();
 
   return runApp(
     MultiProvider(
@@ -28,6 +34,12 @@ void main() {
         ),
         ChangeNotifierProvider<DishInfoViewModel>(
           create: (context) => dishInfoViewModel,
+        ),
+        ChangeNotifierProvider<BottomNabarViewModel>(
+          create: (context) => bottomNavbarViewModel,
+        ),
+        ChangeNotifierProvider<CustomSearchViewModel>(
+          create: (context) => customSearchViewModel,
         )
       ],
       child: const MaterialApp(

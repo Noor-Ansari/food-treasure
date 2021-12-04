@@ -1,12 +1,13 @@
 import "package:flutter/material.dart";
+import 'package:fooder/ui/widgets/bottom_navigation.dart';
 
 import 'package:provider/provider.dart';
+
+import 'package:fooder/business_logic/view_models/categories_view_model.dart';
 
 import 'package:fooder/ui/screens/dishes.dart';
 import 'package:fooder/ui/widgets/card.dart';
 import 'package:fooder/ui/widgets/loading.dart';
-
-import 'package:fooder/business_logic/view_models/categories_view_model.dart';
 
 import 'package:fooder/constants/color.dart';
 
@@ -36,6 +37,7 @@ class _CategoriesState extends State<Categories> {
   @override
   Widget build(BuildContext context) {
     CategoriesViewModel model = Provider.of<CategoriesViewModel>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Fooder'),
@@ -43,6 +45,7 @@ class _CategoriesState extends State<Categories> {
         backgroundColor: primaryColor,
       ),
       body: _ui(model),
+      bottomNavigationBar: const CustomBottomNavigation(),
     );
   }
 

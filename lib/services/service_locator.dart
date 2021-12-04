@@ -3,6 +3,8 @@ import 'package:get_it/get_it.dart';
 import 'package:fooder/business_logic/view_models/categories_view_model.dart';
 import 'package:fooder/business_logic/view_models/dish_info_view_model.dart';
 import 'package:fooder/business_logic/view_models/dishes_view_model.dart';
+import 'package:fooder/business_logic/view_models/bottom_navbar_view_model.dart';
+import 'package:fooder/business_logic/view_models/custom_search_view_model.dart';
 
 import 'package:fooder/services/web_services/category_service/category_service.dart';
 import 'package:fooder/services/web_services/category_service/category_service_imp.dart';
@@ -19,4 +21,6 @@ void setup() {
   serviceLocator.registerFactory(() => CategoriesViewModel());
   serviceLocator.registerFactory(() => DishesViewModel());
   serviceLocator.registerFactory(() => DishInfoViewModel());
+  serviceLocator.registerFactory(() => BottomNabarViewModel());
+  serviceLocator.registerFactory(() => CustomSearchViewModel());
 }
