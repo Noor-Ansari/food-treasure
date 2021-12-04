@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 
 import 'package:provider/provider.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import 'package:fooder/business_logic/models/dish_info.dart';
 import 'package:fooder/business_logic/view_models/custom_search_view_model.dart';
@@ -55,7 +56,13 @@ class CustomSearch extends SearchDelegate<DishInfo?> {
 
     return ListView.builder(
       itemBuilder: (context, index) => ListTile(
-        leading: const Icon(Icons.dining_outlined),
+        leading: SizedBox(
+          height: 32,
+          width: 32,
+          child: CachedNetworkImage(
+            imageUrl: _suggestions[index].image,
+          ),
+        ),
         minLeadingWidth: 12,
         title: RichText(
           text: TextSpan(
