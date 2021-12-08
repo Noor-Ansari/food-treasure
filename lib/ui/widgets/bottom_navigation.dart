@@ -14,14 +14,20 @@ class CustomBottomNavigation extends StatelessWidget {
       currentIndex: model.index,
       onTap: (index) => model.handleChange(index, context: context),
       items: const [
-        BottomNavigationBarItem(icon: Icon(Icons.home_outlined), label: "Home"),
         BottomNavigationBarItem(
-            icon: Icon(
-              Icons.search_outlined,
-            ),
-            label: "Search"),
+          icon: Icon(Icons.home_outlined),
+          label: "Home",
+        ),
         BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_outline), label: "Favorite")
+          icon: Icon(
+            Icons.search_outlined,
+          ),
+          label: "Search",
+        ),
+        BottomNavigationBarItem(
+          icon: Icon(Icons.favorite_outline),
+          label: "Favorite",
+        )
       ],
     );
   }

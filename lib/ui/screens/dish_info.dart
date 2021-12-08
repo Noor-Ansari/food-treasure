@@ -8,11 +8,12 @@ import 'package:fooder/ui/widgets/loading.dart';
 import 'package:fooder/ui/widgets/hyper_link.dart';
 
 import 'package:fooder/business_logic/view_models/dish_info_view_model.dart';
+import 'package:fooder/business_logic/view_models/favorite_dishes_view_model.dart';
 
 import 'package:fooder/services/service_locator.dart';
 
-import 'package:fooder/ui/utils/text.dart';
 import 'package:fooder/constants/color.dart';
+import 'package:fooder/ui/utils/text.dart';
 
 class DishInfo extends StatefulWidget {
   final String name;
@@ -37,6 +38,8 @@ class _DishInfoState extends State<DishInfo> {
   @override
   Widget build(BuildContext context) {
     DishInfoViewModel model = Provider.of<DishInfoViewModel>(context);
+    FavoriteDishesViewModel favModel =
+        Provider.of<FavoriteDishesViewModel>(context);
     return Scaffold(
       appBar: AppBar(
         iconTheme: const IconThemeData(
@@ -52,11 +55,36 @@ class _DishInfoState extends State<DishInfo> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Hero(
-              tag: "dish-image-${widget.name}",
-              child: CachedNetworkImage(
-                imageUrl: widget.image,
-              ),
+            Stack(
+              children: [
+                Hero(
+                  tag: "dish-image-${widget.name}",
+                  child: CachedNetworkImage(
+                    imageUrl: widget.image,
+                  ),
+                ),
+                Align(
+                  child: model.isFavorite()
+                      ? GestureDetector(
+                          onTap: () =>
+                              favModel.removeFromFavorites(model.dishInfo),
+                          child: const Icon(
+                            Icons.favorite,
+                            color: Colors.red,
+                            size: 48,
+                          ),
+                        )
+                      : GestureDetector(
+                          onTap: () => favModel.addToFavorites(model.dishInfo),
+                          child: const Icon(
+                            Icons.favorite_border,
+                            color: Colors.red,
+                            size: 48,
+                          ),
+                        ),
+                  alignment: Alignment.topRight,
+                ),
+              ],
             ),
             const SizedBox(height: 24.0),
             if (model.loading || model.noData) ...[
