@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:fooder/business_logic/models/dish_info.dart';
 
 import 'package:fooder/services/service_locator.dart';
-import 'package:fooder/services/storage_services/favorite_dishes_service/favorite_dish_service.dart';
+import 'package:fooder/services/storage_services/favorite_dishes_service.dart';
 import 'package:fooder/services/web_services/dish_service/dish_service.dart';
 
 class DishInfoViewModel extends ChangeNotifier {
@@ -13,8 +13,8 @@ class DishInfoViewModel extends ChangeNotifier {
   bool noData = false;
 
   final DishService _dishService = serviceLocator<DishService>();
-  final FavoriteDishService _favoriteDishService =
-      serviceLocator<FavoriteDishService>();
+  final FavoriteDishesService _favoriteDishService =
+      serviceLocator<FavoriteDishesService>();
 
   Future<void> loadData(String dishName) async {
     if (this.dishName != dishName) {
@@ -31,6 +31,8 @@ class DishInfoViewModel extends ChangeNotifier {
   }
 
   bool isFavorite() {
-    return _favoriteDishService.isFavorite(dishInfo);
+    return _favoriteDishService
+        .getDishes()
+        .any((dish) => dish.name == dishInfo.name);
   }
 }
