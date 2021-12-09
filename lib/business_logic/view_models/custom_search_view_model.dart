@@ -7,10 +7,13 @@ import 'package:fooder/business_logic/models/dish_info.dart';
 
 import 'package:fooder/services/service_locator.dart';
 import 'package:fooder/services/web_services/dish_service/dish_service.dart';
+import 'package:fooder/services/storage_services/search_history_service.dart';
 
 class CustomSearchViewModel extends ChangeNotifier {
-  final List<DishInfo> searchHistory = [];
-  final DishService _service = serviceLocator<DishService>();
+  final DishService _dishService = serviceLocator<DishService>();
+  final SearchHistoryService _searchHistoryService =
+      serviceLocator<SearchHistoryService>();
+  List<DishInfo> searchHistory = [];
   List<DishInfo> searchData = [];
   String query = "";
 
@@ -19,19 +22,18 @@ class CustomSearchViewModel extends ChangeNotifier {
         (query.toLowerCase().contains(this.query.toLowerCase()) &&
             this.query.isNotEmpty) ||
         query.isEmpty) {
+      searchHistory = _searchHistoryService.getDishes();
       return;
     }
     this.query = query;
-    _service.fetchDishInfo(query).then((data) {
+    _dishService.fetchDishInfo(query).then((data) {
       searchData = data;
       notifyListeners();
     });
   }
 
   void handleItemSelected(BuildContext context, DishInfo selectedItem) {
-    if (!searchHistory.contains(selectedItem)) {
-      searchHistory.insert(0, selectedItem);
-    }
+    _searchHistoryService.addDish(selectedItem);
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
@@ -39,6 +41,12 @@ class CustomSearchViewModel extends ChangeNotifier {
             ui.DishInfo(name: selectedItem.name, image: selectedItem.image),
       ),
     );
+  }
+
+  void removeSearchHistory(DishInfo dish) {
+    _searchHistoryService.removeDish(dish);
+    searchData = _searchHistoryService.getDishes();
+    notifyListeners();
   }
 
   List<DishInfo> filterSuggestions(String query) {

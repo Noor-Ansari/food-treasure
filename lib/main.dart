@@ -21,6 +21,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(DishInfoAdapter());
   await Hive.openBox<DishInfo>('favoriteDishes');
+  await Hive.openBox<DishInfo>('searchHistory');
   CategoriesViewModel categoriesViewModel =
       serviceLocator<CategoriesViewModel>();
   DishesViewModel dishesViewModel = serviceLocator<DishesViewModel>();
