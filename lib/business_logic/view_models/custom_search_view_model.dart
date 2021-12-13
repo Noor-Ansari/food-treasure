@@ -43,12 +43,6 @@ class CustomSearchViewModel extends ChangeNotifier {
     );
   }
 
-  void removeSearchHistory(DishInfo dish) {
-    _searchHistoryService.removeDish(dish);
-    searchData = _searchHistoryService.getDishes();
-    notifyListeners();
-  }
-
   List<DishInfo> filterSuggestions(String query) {
     return searchData
         .where(
@@ -60,5 +54,10 @@ class CustomSearchViewModel extends ChangeNotifier {
     return searchData
         .where((item) => item.name.toLowerCase() == query.toLowerCase())
         .toList();
+  }
+
+  void clearSearchHistory() {
+    _searchHistoryService.clearDishes();
+    notifyListeners();
   }
 }

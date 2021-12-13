@@ -37,10 +37,6 @@ class SearchItem extends StatelessWidget {
           ],
         ),
       ),
-      trailing: IconButton(
-        onPressed: () => model.removeSearchHistory(dish),
-        icon: const Icon(Icons.clear),
-      ),
       onTap: () => model.handleItemSelected(context, dish),
     );
   }

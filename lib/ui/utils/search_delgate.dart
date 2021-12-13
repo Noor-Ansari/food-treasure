@@ -55,12 +55,24 @@ class CustomSearch extends SearchDelegate<DishInfo?> {
     List<DishInfo> _suggestions =
         query.isEmpty ? model.searchHistory : model.filterSuggestions(query);
 
-    return ListView.builder(
-      itemBuilder: (context, index) => SearchItem(
-        dish: _suggestions[index],
-        query: query,
-      ),
-      itemCount: _suggestions.length,
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+            shrinkWrap: true,
+            itemBuilder: (context, index) => SearchItem(
+              dish: _suggestions[index],
+              query: query,
+            ),
+            itemCount: _suggestions.length,
+          ),
+        ),
+        if (query.isEmpty && model.searchHistory.isNotEmpty)
+          TextButton(
+            child: const Text("Clear search history"),
+            onPressed: () => model.clearSearchHistory(),
+          )
+      ],
     );
   }
 }
