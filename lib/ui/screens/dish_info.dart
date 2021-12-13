@@ -51,40 +51,38 @@ class _DishInfoState extends State<DishInfo> {
         ),
         centerTitle: true,
         backgroundColor: primaryColor,
+        actions: [
+          if (!model.loading)
+            model.isFavorite()
+                ? GestureDetector(
+                    onTap: () => favModel.removeFromFavorites(model.dishInfo),
+                    child: const Icon(
+                      Icons.favorite,
+                      color: Colors.white,
+                      size: 32,
+                    ),
+                  )
+                : GestureDetector(
+                    onTap: () => favModel.addToFavorites(model.dishInfo),
+                    child: const Icon(
+                      Icons.favorite_border,
+                      color: Colors.white,
+                      size: 32,
+                    ),
+                  ),
+          const SizedBox(
+            width: 24,
+          )
+        ],
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Stack(
-              children: [
-                Hero(
-                  tag: "dish-image-${widget.name}",
-                  child: CachedNetworkImage(
-                    imageUrl: widget.image,
-                  ),
-                ),
-                Align(
-                  child: model.isFavorite()
-                      ? GestureDetector(
-                          onTap: () =>
-                              favModel.removeFromFavorites(model.dishInfo),
-                          child: const Icon(
-                            Icons.favorite,
-                            color: Colors.red,
-                            size: 48,
-                          ),
-                        )
-                      : GestureDetector(
-                          onTap: () => favModel.addToFavorites(model.dishInfo),
-                          child: const Icon(
-                            Icons.favorite_border,
-                            color: Colors.red,
-                            size: 48,
-                          ),
-                        ),
-                  alignment: Alignment.topRight,
-                ),
-              ],
+            Hero(
+              tag: "dish-image-${widget.name}",
+              child: CachedNetworkImage(
+                imageUrl: widget.image,
+              ),
             ),
             const SizedBox(height: 24.0),
             if (model.loading || model.noData) ...[
