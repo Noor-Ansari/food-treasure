@@ -3,8 +3,8 @@ import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:fooder/business_logic/models/dish_info.dart';
-import 'package:fooder/business_logic/view_models/custom_search_view_model.dart';
+import 'package:food_treasure/business_logic/models/dish_info.dart';
+import 'package:food_treasure/business_logic/view_models/custom_search_view_model.dart';
 
 class SearchItem extends StatelessWidget {
   final DishInfo dish;

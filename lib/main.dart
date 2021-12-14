@@ -4,17 +4,17 @@ import 'package:provider/provider.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
-import 'package:fooder/ui/screens/loader.dart';
+import 'package:food_treasure/ui/screens/loader.dart';
 
-import 'package:fooder/business_logic/models/dish_info.dart';
-import 'package:fooder/business_logic/view_models/favorite_dishes_view_model.dart';
-import 'package:fooder/business_logic/view_models/custom_search_view_model.dart';
-import 'package:fooder/business_logic/view_models/categories_view_model.dart';
-import 'package:fooder/business_logic/view_models/dish_info_view_model.dart';
-import 'package:fooder/business_logic/view_models/dishes_view_model.dart';
-import 'package:fooder/business_logic/view_models/bottom_navbar_view_model.dart';
+import 'package:food_treasure/business_logic/models/dish_info.dart';
+import 'package:food_treasure/business_logic/view_models/favorite_dishes_view_model.dart';
+import 'package:food_treasure/business_logic/view_models/custom_search_view_model.dart';
+import 'package:food_treasure/business_logic/view_models/categories_view_model.dart';
+import 'package:food_treasure/business_logic/view_models/dish_info_view_model.dart';
+import 'package:food_treasure/business_logic/view_models/dishes_view_model.dart';
+import 'package:food_treasure/business_logic/view_models/bottom_navbar_view_model.dart';
 
-import 'package:fooder/services/service_locator.dart';
+import 'package:food_treasure/services/service_locator.dart';
 
 void main() async {
   setup();

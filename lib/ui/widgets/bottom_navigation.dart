@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:provider/provider.dart";
 
-import 'package:fooder/business_logic/view_models/bottom_navbar_view_model.dart';
+import 'package:food_treasure/business_logic/view_models/bottom_navbar_view_model.dart';
 
 class CustomBottomNavigation extends StatelessWidget {
   const CustomBottomNavigation({Key? key}) : super(key: key);

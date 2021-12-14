@@ -1,9 +1,9 @@
 import 'dart:convert';
 import "package:http/http.dart";
 
-import 'package:fooder/business_logic/models/category.dart';
+import 'package:food_treasure/business_logic/models/category.dart';
 
-import 'package:fooder/services/web_services/category_service/category_service.dart';
+import 'package:food_treasure/services/web_services/category_service/category_service.dart';
 
 class CategoryServiceImp implements CategoryService {
   @override

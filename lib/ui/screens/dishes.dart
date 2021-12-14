@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:fooder/ui/widgets/bottom_navigation.dart';
+import 'package:food_treasure/ui/widgets/bottom_navigation.dart';
 
 import 'package:provider/provider.dart';
 
-import 'package:fooder/ui/screens/dish_info.dart';
-import 'package:fooder/ui/widgets/card.dart';
-import 'package:fooder/ui/widgets/loading.dart';
+import 'package:food_treasure/ui/screens/dish_info.dart';
+import 'package:food_treasure/ui/widgets/card.dart';
+import 'package:food_treasure/ui/widgets/loading.dart';
 
-import 'package:fooder/business_logic/view_models/dishes_view_model.dart';
+import 'package:food_treasure/business_logic/view_models/dishes_view_model.dart';
 
-import 'package:fooder/constants/color.dart';
+import 'package:food_treasure/constants/color.dart';
 
 class Dishes extends StatefulWidget {
   final String categoryName;

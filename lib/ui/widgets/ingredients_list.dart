@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 
-import 'package:fooder/constants/color.dart';
+import 'package:food_treasure/constants/color.dart';
 
 class IngredientList extends StatelessWidget {
   final List<Map<String, dynamic>> ingredients;

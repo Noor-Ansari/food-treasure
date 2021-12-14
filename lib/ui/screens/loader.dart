@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import "package:flutter_spinkit/flutter_spinkit.dart";
 
-import 'package:fooder/ui/screens/categories.dart';
+import 'package:food_treasure/ui/screens/categories.dart';
 
 class Loader extends StatefulWidget {
   const Loader({Key? key}) : super(key: key);

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:fooder/ui/screens/categories.dart';
-import 'package:fooder/ui/screens/favorite_dishes.dart';
-import 'package:fooder/ui/utils/search_delgate.dart';
+import 'package:food_treasure/ui/screens/categories.dart';
+import 'package:food_treasure/ui/screens/favorite_dishes.dart';
+import 'package:food_treasure/ui/utils/search_delgate.dart';
 
 class BottomNabarViewModel extends ChangeNotifier {
   int _index = 0;

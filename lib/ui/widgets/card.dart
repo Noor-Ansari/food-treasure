@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 
 import "package:cached_network_image/cached_network_image.dart";
 
-import 'package:fooder/constants/color.dart';
+import 'package:food_treasure/constants/color.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({required this.cardText, required this.cardImage, Key? key})

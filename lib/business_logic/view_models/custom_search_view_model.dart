@@ -1,13 +1,13 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-import 'package:fooder/ui/screens/dish_info.dart' as ui;
+import 'package:food_treasure/ui/screens/dish_info.dart' as ui;
 
-import 'package:fooder/business_logic/models/dish_info.dart';
+import 'package:food_treasure/business_logic/models/dish_info.dart';
 
-import 'package:fooder/services/service_locator.dart';
-import 'package:fooder/services/web_services/dish_service/dish_service.dart';
-import 'package:fooder/services/storage_services/search_history_service.dart';
+import 'package:food_treasure/services/service_locator.dart';
+import 'package:food_treasure/services/web_services/dish_service/dish_service.dart';
+import 'package:food_treasure/services/storage_services/search_history_service.dart';
 
 class CustomSearchViewModel extends ChangeNotifier {
   final DishService _dishService = serviceLocator<DishService>();

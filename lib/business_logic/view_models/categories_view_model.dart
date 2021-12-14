@@ -1,9 +1,9 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:fooder/services/service_locator.dart';
-import 'package:fooder/services/web_services/category_service/category_service.dart';
+import 'package:food_treasure/services/service_locator.dart';
+import 'package:food_treasure/services/web_services/category_service/category_service.dart';
 
-import 'package:fooder/business_logic/models/category.dart' as ct;
+import 'package:food_treasure/business_logic/models/category.dart' as ct;
 
 class CategoriesViewModel extends ChangeNotifier {
   bool loading = false;

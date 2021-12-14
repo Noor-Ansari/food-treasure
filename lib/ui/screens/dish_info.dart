@@ -3,17 +3,17 @@ import "package:flutter/material.dart";
 import 'package:provider/provider.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
-import 'package:fooder/ui/widgets/ingredients_list.dart';
-import 'package:fooder/ui/widgets/loading.dart';
-import 'package:fooder/ui/widgets/hyper_link.dart';
+import 'package:food_treasure/ui/widgets/ingredients_list.dart';
+import 'package:food_treasure/ui/widgets/loading.dart';
+import 'package:food_treasure/ui/widgets/hyper_link.dart';
 
-import 'package:fooder/business_logic/view_models/dish_info_view_model.dart';
-import 'package:fooder/business_logic/view_models/favorite_dishes_view_model.dart';
+import 'package:food_treasure/business_logic/view_models/dish_info_view_model.dart';
+import 'package:food_treasure/business_logic/view_models/favorite_dishes_view_model.dart';
 
-import 'package:fooder/services/service_locator.dart';
+import 'package:food_treasure/services/service_locator.dart';
 
-import 'package:fooder/constants/color.dart';
-import 'package:fooder/ui/utils/text.dart';
+import 'package:food_treasure/constants/color.dart';
+import 'package:food_treasure/ui/utils/text.dart';
 
 class DishInfo extends StatefulWidget {
   final String name;

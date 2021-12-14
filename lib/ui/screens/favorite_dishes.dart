@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 
-import 'package:fooder/ui/screens/dish_info.dart' as ui;
-import 'package:fooder/ui/widgets/bottom_navigation.dart';
+import 'package:food_treasure/ui/screens/dish_info.dart' as ui;
+import 'package:food_treasure/ui/widgets/bottom_navigation.dart';
 
-import 'package:fooder/business_logic/models/dish_info.dart';
-import 'package:fooder/business_logic/view_models/favorite_dishes_view_model.dart';
+import 'package:food_treasure/business_logic/models/dish_info.dart';
+import 'package:food_treasure/business_logic/view_models/favorite_dishes_view_model.dart';
 
-import 'package:fooder/constants/color.dart';
+import 'package:food_treasure/constants/color.dart';
 
 class FavoriteDishes extends StatefulWidget {
   const FavoriteDishes({Key? key}) : super(key: key);

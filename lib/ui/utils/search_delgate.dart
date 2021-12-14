@@ -2,10 +2,10 @@ import "package:flutter/material.dart";
 
 import 'package:provider/provider.dart';
 
-import 'package:fooder/ui/widgets/search_item.dart';
+import 'package:food_treasure/ui/widgets/search_item.dart';
 
-import 'package:fooder/business_logic/models/dish_info.dart';
-import 'package:fooder/business_logic/view_models/custom_search_view_model.dart';
+import 'package:food_treasure/business_logic/models/dish_info.dart';
+import 'package:food_treasure/business_logic/view_models/custom_search_view_model.dart';
 
 class CustomSearch extends SearchDelegate<DishInfo?> {
   final String placeholder;

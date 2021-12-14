@@ -1,10 +1,10 @@
 import 'dart:convert';
 import "package:http/http.dart";
 
-import 'package:fooder/business_logic/models/dish.dart';
-import 'package:fooder/business_logic/models/dish_info.dart';
+import 'package:food_treasure/business_logic/models/dish.dart';
+import 'package:food_treasure/business_logic/models/dish_info.dart';
 
-import 'package:fooder/services/web_services/dish_service/dish_service.dart';
+import 'package:food_treasure/services/web_services/dish_service/dish_service.dart';
 
 class DishServiceImp implements DishService {
   @override
